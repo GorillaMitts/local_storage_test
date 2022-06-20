@@ -25,11 +25,14 @@ class HomePage extends StatefulWidget {
   _MyHomePageState createState() =>  _MyHomePageState();
 }
 
+/* Define Item for Storage */
 class TodoItem {
   String title;
   bool done;
 
-  TodoItem({required this.title, required this.done});
+  TodoItem({
+    required this.title, 
+    required this.done});
 
   toJSONEncodable() {
     Map<String, dynamic> m =  {};
@@ -41,6 +44,7 @@ class TodoItem {
   }
 }
 
+/* Define Array for retrieval */
 class TodoList {
   List<TodoItem> items = [];
 
@@ -86,6 +90,11 @@ class _MyHomePageState extends State<HomePage> {
       list.items = storage.getItem('todos') ?? [];
     }
     );
+  }
+
+  void _save() {
+    _addItem(controller.value.text);
+    controller.clear();
   }
 
   @override
@@ -174,10 +183,5 @@ class _MyHomePageState extends State<HomePage> {
           )
       ),
     );
-  }
-
-  void _save() {
-    _addItem(controller.value.text);
-    controller.clear();
   }
 }
